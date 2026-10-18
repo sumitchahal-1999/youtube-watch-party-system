@@ -21,6 +21,10 @@ Open `http://localhost:5173`. The single development command starts the React/Vi
 
 For a production build, run `npm run build` followed by `npm start`, then open `http://localhost:3000`. The API serves the built React app. After login, Socket.IO creates a meeting or joins one by ID. Meeting chat, selected-video updates, and video play, pause, and seek positions are shared over the authenticated socket connection. The latest 100 messages, selected video, and current playback position are saved with the meeting, so they remain available to participants who join later. If a browser blocks autoplay, click **Click to sync playback** in the player. The JWT is kept in the browser tab's session storage and is cleared when you sign out or close the tab.
 
+## Deploy to Render
+
+The repository includes a Render Blueprint in `render.yaml`. Create a MongoDB database with a MongoDB-compatible provider such as MongoDB Atlas, then create a new Blueprint in Render from this repository. Enter the database connection string when Render prompts for `MONGODB_URI`; Render generates `JWT_SECRET` automatically. The Blueprint builds the React frontend and runs the API as one web service.
+
 ## Authentication endpoints
 
 Authentication uses signed JWT bearer tokens. Signup and signin return a token in the JSON response; send it in the `Authorization: Bearer <token>` header for authenticated requests. Tokens are stateless, so signing out requires the client to discard its token.
